@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>ブログ一覧</h2>
+                <h2>ブログ管理サイト</h2>
             </div>
         </div>
     </div>
