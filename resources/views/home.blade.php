@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    Blog Management Siteへようこそ!
                 </div>
             </div>
         </div>

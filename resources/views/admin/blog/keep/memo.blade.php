@@ -21,12 +21,11 @@
             <nav>
               <ul class="Side-bar">
                 <li class="theme">[Today]</li>
-                <li><a href="/admin/blog/today/trend">Trend</a></li>
-                <li><a href="/admin/blog/today/update">Update</a></li>
+                <li><a href="../Today/trend.html">Trend</a></li>
+                <li><a href="../Today/update_site.html">Update</a></li>
 
                 <li class="theme">[Keep]</li>
-                <li><a href="/admin/blog">History</a></li>
-                <li><a href="/admin/blog/create">Memo</a></li>
+                <li><a href="../keep/memo.blade.php">Memo</a></li>
               </ul>
             </nav>
           </div>
@@ -37,12 +36,39 @@
          <nav>
            <ul class="Side-bar">
              <li class="theme">[Today]</li>
-             <li><a href="/admin/blog/today/trend">Trend</a></li>
-             <li><a href="/admin/blog/today/update">Update</a></li>
+             <li><a href="../Today/trend.html">Trend</a></li>
+             <li><a href="../Today/update_site.html">Update</a></li>
+
+             <li class="theme">[Bloger]</li>
+             <ul class="ac">
+               <li>
+                 <div class="ac-label">
+                   <p>Folder</p>
+                   <div class="icon-wrap"><span class="icon"></span></div>
+                 </div>
+                 <div class="ac-content">
+                   <p><a href="../Bloger/folder.html">マナブ</a></p>
+                   <p><a href="../Bloger/folder.html">マナブ</a></p>
+                 </div>
+               </li>
+             </ul>
+             <ul class="ac">
+               <li>
+                 <div class="ac-label">
+                   <p>Folder</p>
+                   <div class="icon-wrap"><span class="icon"></span></div>
+                 </div>
+                 <div class="ac-content">
+                   <p><a href="../Bloger/folder.html">マナブ</a></p>
+                   <p><a href="../Bloger/folder.html">マナブ</a></p>
+                 </div>
+               </li>
+             </ul>
 
              <li class="theme">[Keep]</li>
-             <li><a href="/admin/blog">History</a></li>
-             <li><a href="/admin/blog/create">Memo</a></li>
+             <li><a href="../Keep/read_later.html">Read Later</a></li>
+             <li><a href="../Keep/history_site.html">History</a></li>
+             <li><a href="../keep/memo.blade.php">Memo</a></li>
            </ul>
          </nav>
        </div>
@@ -59,7 +85,7 @@
           <div class="row">
            <div class="col-md-8 mx-auto">
              <h2 class="memo_title">Memo</h2>
-             <form action="{{ action('Admin\BlogController@create') }}" method="post" enctype="multipart/form-data">
+             <form action="{{ action('Admin\BlogController@memo') }}" method="post" enctype="multipart/form-data">
 
                  @if (count($errors) > 0)
                      <ul>
@@ -69,9 +95,9 @@
                      </ul>
                  @endif
                  <div class="form-group row">
-                     <label class="col-md-2" for="date">date</label>
+                     <label class="col-md-2" for="title">date</label>
                      <div class="col-md-10">
-                         <input type="text" class="form-control" name="date" value="{{ old('date') }}">
+                         <input type="text" class="form-control" name="title" value="{{ old('title') }}">
                      </div>
                  </div>
                  <div class="form-group row">
@@ -101,4 +127,30 @@
        });
      });
    </script>
+   <script>
+     $(function() {
+       $('.ac-label').click(function () {
+         $(this).next('div').slideToggle();
+         $(this).find(".icon").toggleClass('open');
+       });
+     });
+   </script>
+   <?php
+   $feed = FeedReader::read('https://rss.itmedia.co.jp/rss/2.0/itmedia_all.xml');
+
+   if ( $feed->error() ) {
+       echo $feed->error();
+   }
+
+   foreach ($feed->get_items() as $item) {
+       $hash = [];
+       $hash['site_title'] = $item->get_feed()->get_title();
+       $hash['title'] = trim($item->get_title());
+       $hash['permalink'] = trim($item->get_permalink());
+       $hash['link'] = trim($item->get_link());
+       $hash['date'] = $item->get_date('Y-m-d H:i:s');
+       $hash['content'] = $item->get_content();
+       dump($hash);
+   }
+   ?>
 @endsection

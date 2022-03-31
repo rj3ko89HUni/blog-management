@@ -1,8 +1,8 @@
 body {
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat;
   background-position: center;
   background-color: #99FFFF;
-  color: #fff;
+  color: #fff; */
 }
 
 .navbar-laravel {
@@ -38,4 +38,3 @@ body {
 .login-body {
   background-color: rgba(0, 0, 0, 0.25);
 }
-

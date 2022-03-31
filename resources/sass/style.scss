@@ -1,0 +1,949 @@
+body {
+    /* background-color: rgba(142,224,242,0.5); */
+  width: 100%;
+  margin: 0 auto;
+  /* display: flex; */
+  font-size: 1rem;
+  min-height: 100vh;
+}
+
+#home {
+  background-image: url("https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=800&q=60");
+  width: 100%;
+  min-height: 100vh;
+}
+
+.big-img {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+header {
+  margin-top: 20px;
+  margin: 0 auto 40px auto;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header-title-area {
+  text-align: center;
+  /* margin-top: 20px; */
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-size: 50px;
+  padding-top: 20px;
+}
+
+.header-navigation {
+  width: 100%;
+  display: flex;
+  text-transform: uppercase;
+  text-align: center;
+  justify-content: center;
+  position: relative;
+  /* background-color: rgba(0,0,0,0.1); */
+  padding: 20px 20px;
+}
+
+.header-navigation:after {
+  clear: both;
+  display: block;
+  content: " ";
+}
+
+.header-navigation li {
+  padding: 0 40px;
+  text-align: center;
+  /* border-right: 2px solid #ccc; */
+  list-style-type: none;
+}
+
+.header-navigation li a {
+  font-size: 20px;
+  color: #000000;
+  text-decoration: none;
+}
+
+.header-navigation li a:hover {
+  color: #0bd;
+  text-decoration-color: #0bd;
+}
+
+.all {
+  display: flex;
+  margin: 0 auto;
+}
+
+.aside {
+  width: 20%;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  background-color: #dbedf0;
+  /* position: fixed; */
+  /* text-align: center; */
+}
+
+.Side-bar {
+  list-style: none;
+  padding: 0;
+  margin-left: 5px;
+  /* text-align: center; */
+}
+
+.Side-bar a {
+  font-family: serif;
+  text-decoration: none;
+  color: black;
+  padding-left: 5px;
+}
+
+.Side-bar a:hover {
+  background-color: #87888e;
+  color: yellow;
+}
+
+.theme {
+  margin-top: 15px;
+  font-style: italic;
+  font-size: 30px;
+}
+
+* {
+  /* box-sizing: border-box;
+  padding: 0; */
+}
+.ac {
+  box-sizing: border-box;
+  padding: 0;
+  width: 100px;
+  /* margin: 0 auto; */
+}
+.ac > li {
+  /* padding-bottom: 6px; */
+  list-style: none;
+}
+.ac-label  {
+  cursor: pointer;
+  /* text-align: center; */
+  position: relative;
+  /* border: 1px solid #d9d9d9; */
+}
+.ac-label p {
+  margin: 5px;
+}
+
+.ac-content {
+  display: none;
+  padding: 0 8px;
+  /* border: 1px solid #d9d9d9; */
+}
+
+.ac-content p {
+  font-size: 13px;
+  margin: 0;
+}
+
+.icon-wrap {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translatey(-50%);
+  width: 38px;
+  height: 38px;
+}
+.icon {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+.icon:before {
+  position: absolute;
+  content: "";
+  transition: all .4s;
+  width: 8px;
+  height: 8px;
+  border: 0px;
+  border-top: solid 2px #000;
+  border-right: solid 2px #000;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+
+.icon.open:before {
+  top: 56%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* .open, */
+.fas fa-bars,
+.close {
+  display: none;
+}
+
+
+#nav-drawer {
+  position: absolute;
+  left: 10px;
+}
+
+/*チェックボックス等は非表示に*/
+.nav-unshown {
+  display:none;
+}
+
+/*アイコンのスペース*/
+#nav-open {
+  display: inline-block;
+  width: 30px;
+  height: 22px;
+  vertical-align: middle;
+  /* background-color: white; */
+}
+
+/*ハンバーガーの形をCSSで表現*/
+#nav-open span, #nav-open span:before, #nav-open span:after {
+  position: absolute;
+  height: 3px;/*線の太さ*/
+  width: 22px;/*長さ*/
+  border-radius: 3px;
+  background: #555;
+  display: block;
+  content: '';
+  cursor: pointer;
+  /* left: 10px; */
+}
+#nav-open span:before {
+  bottom: -8px;
+}
+#nav-open span:after {
+  bottom: -16px;
+}
+
+/*閉じる用の薄黒箇所*/
+#nav-close {
+  display: none;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0;
+  transition: .3s ease-in-out;
+}
+
+/*メニューの中身*/
+#nav-content {
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 90%;
+  max-width: 250px;/*最大幅（お好みで調整を）*/
+  height: 100%;
+  background: #dbedf0;
+  transition: .3s ease-in-out;
+  -webkit-transform: translateX(-105%);
+  transform: translateX(-105%);
+}
+
+/*チェックがついたら表示させる*/
+#nav-input:checked ~ #nav-close {
+  display: block;
+  opacity: .5;
+}
+
+#nav-input:checked ~ #nav-content {
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%);
+  box-shadow: 6px 0 25px rgba(0,0,0,.15);
+}
+
+input[type="checkbox"] {
+  position: absolute;
+  left: -50vw;
+}
+
+.main {
+  width: 100%;
+  padding: 25px;
+  margin: 0 auto;
+}
+
+/* .open,
+.close {
+  display: block;
+}
+
+.open {
+  position: absolute;
+}
+
+.aside {
+  position: absolute;
+  left: -250px;
+  height: 100%;
+  transition: all 0.2s;
+  background: #ffffff;
+}
+
+input[type="checkbox"]:checked ~ .aside {
+  left: 0;
+}
+
+input[type="checkbox"]:checked ~ .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8) !important;
+} */
+.good {
+  font-size: 45px;
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+/* .contentss {
+  width: 700px;
+  margin: 0 auto;
+}
+
+.card-contents {
+    width: 680px;
+    padding: 10px;
+    display: block;
+    margin-bottom: 40px;
+    background-color: #fff;
+}
+
+.list-area {
+  display: flex;
+}
+
+.list-area:after {
+    clear: both;
+    display: block;
+    content: " ";
+}
+
+.Buroger-list {
+  width: 100px;
+  margin-right: 20px;
+  margin-left: 20px
+}
+
+.Burogu-list {
+  width: 500px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.Buroger-image {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+
+.Buroger-name {
+    text-align: center;
+}
+
+.text-title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.Site-information {
+  margin-top: 0px;
+} */
+
+.contentss {
+  width: 750px;
+  margin: 0 auto;
+}
+
+.contentsss {
+}
+
+.preservation {
+  margin-bottom: 10px;
+}
+
+.card-contents {
+    width: 730px;
+    display: block;
+    margin-bottom: 40px;
+    background-color: #eaf6fd;
+}
+
+.list-area {
+  display: flex;
+}
+
+.list-area:after {
+    clear: both;
+    display: block;
+    content: " ";
+}
+
+.Buroger-list {
+  width: 150px;
+  margin-right: 20px;
+  margin-left: 20px
+}
+
+.Burogu-list {
+  width: 500px;
+  margin-right: 10px;
+  margin-left: 0px;
+}
+
+.Buroger-image {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    width: 150px;
+    height: 150px;
+    display: block;
+}
+
+.Buroger-name {
+    text-align: center;
+}
+
+.text-title {
+    font-size: 25px;
+    /* font-weight: bold; */
+    font-style: italic;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.Site-information {
+  display: inline-block;
+  margin-top: 0px;
+  font-family: sans-serif;
+}
+
+
+/* blog.html */
+.card-contents2 {
+    width: auto;
+    padding: 10px;
+    display: block;
+    margin: 0 auto;
+    background-color: #eaf6fd;
+}
+
+.Burogu-list-1 {
+  margin: 0 auto;
+  width: auto;
+}
+
+.button-list {
+  text-align: center;
+  padding-right: 16px;
+}
+
+.button {
+  margin-right: 10px;
+  background: red;
+  font-size: 1.2rem;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: #0090aa;
+  cursor: pointer;
+}
+
+
+.button-list-2 {
+  text-align: center;
+  padding-right: 40px;
+}
+
+.button2 {
+  font-size: 1.2rem;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  background: green;
+  text-decoration: none;
+}
+
+.button2:hover {
+  background: #0090aa;
+  /* background: #0bd; */
+}
+
+.text-title1 {
+  text-align: center;
+}
+
+.blog-information {
+  margin: 10px;
+  width: auto;
+  height: 100%;
+}
+
+.container-2 {
+  width: 800px;
+  margin: 0 auto 40px auto;
+}
+
+.contents-2 {
+  display: flex;
+  width: 200px;
+  margin-right: 30px;
+  padding: 10px 10px;
+}
+
+.good-blog-list {
+  text-align: center;
+}
+
+.card-content-2 {
+  display: block;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.Burogu-list-2 {
+  width: 200px;
+  margin-right: 35px;
+  margin-left: 35px;
+}
+
+.text-title2 {
+  text-align: center;
+}
+
+.Site-information2 {
+
+}
+
+.contents-3 {
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.form-box {
+  box-sizing: border-box;
+  /* display: flex; */
+}
+
+.form-input {
+  font-size: 18px;
+  border: none;
+  width: 400px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 5px;
+  outline: 0;
+  border: 1px solid #999;
+  overflow: hidden;
+}
+
+.form-button {
+  width: auto;
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  outline: 0;
+  border: 1px solid #999;
+  overflow: hidden;
+  margin: 0;
+}
+
+.reserch-review {
+  font-size: 30px;
+}
+
+.search_container{
+  box-sizing: border-box
+}
+.search_container input[type="text"]{
+  border: 1px solid #999;
+  padding: 10px 10px;
+  border-radius: 20px;
+  height: 2.0em;
+  width: 250px;
+  overflow: hidden;
+}
+.search_container input[type="text"]:focus {
+  outline: 0;
+}
+.search_container input[type="submit"]{
+  left: 50px;
+  cursor: pointer;
+  font-family: FontAwesome;
+  font-size: 1.3em;
+  border: none;
+  background: none;
+  color: #3879D9;
+  outline : none;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.main2 {
+}
+
+.memo_container {
+  width: 100%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  /* margin-right: -15px;
+  margin-left: -15px; */
+}
+
+.mx-auto {
+  margin: 0 auto;
+  width: 700px;
+  height: auto;
+}
+
+.memo_title {
+  font-size: 40px;
+  font-style: italic;
+  text-align: center;
+  margin: 15px;
+  font-weight: normal;
+}
+
+.form-group {
+  width: 700px;
+  text-align: center;
+  margin: auto;
+}
+
+.col-md-2 {
+  /* flex: auto; */
+  /* width: 100%; */
+  /* box-sizing: border-box; */
+  position: relative;
+  /* padding: 15px; */
+  font-size: 15px;
+}
+
+.col-md-10 {
+  flex: auto;
+  padding: 10px;
+}
+
+textarea.form-control {
+  height: auto;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 30px;
+  background-color: white;
+  color: black;
+  font-size: 1.2rem;
+  border: 1px solid #ced4da;
+  border-radius: 2px;
+  border-color: blue;
+  padding: 5px;
+}
+
+.btn-primary {
+  color: white;
+  background-color: #3490dc;
+  border-color: #3490dc;
+  display: inline-block;
+  text-align: center;
+  font-size: 15px;
+  padding: 8px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  text-decoration: none;
+  line-height: 1.6;
+}
+
+.btn-primary:hover {
+  cursor: alias;
+  background: #0090aa;
+}
+
+
+@media screen and (min-width: 800px) {
+    #nav-drawer {
+      display: none;
+    }
+}
+
+/* @media screen and (min-width: 768px) {
+    .memo_container {
+      max-width: 700px;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .memo_container {
+      max-width: 540px;
+    }
+} */
+
+@media screen and (max-width: 1025px) {
+    /* .main {
+      width: 100%;
+      padding: 25px;
+      margin: 0 auto;
+    } */
+
+    .contentss {
+      display: inline-block;
+      margin: 0 auto;
+    }
+
+    .contentss {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .card-contents {
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 40px;
+        background-color: #eaf6fd;
+        /* background-color: #fff; */
+    }
+
+    .list-area {
+      display: flex;
+    }
+
+    .list-area:after {
+        clear: both;
+        display: block;
+        content: " ";
+    }
+
+    .Buroger-list {
+      width: auto;
+      margin-right: 20px;
+      margin-left: 20px
+    }
+
+    .Burogu-list {
+      width: auto;
+      margin-right: 10px;
+      margin-left: 0px;
+    }
+
+    .Buroger-image {
+        margin-top: 25px;
+        margin-bottom: 10px;
+        width: 100px;
+        height: 100px;
+        display: block;
+    }
+
+    .Buroger-name {
+        text-align: center;
+    }
+
+    .text-title {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    .Site-information {
+      margin-top: 0px;
+    }
+
+    .mx-auto {
+      width: 100%;
+    }
+
+    .form-group {
+      width: 100%;
+    }
+
+    /* #nav-drawer {
+     display:none;
+   } */
+    /* .open, */
+    /* .fas fa-bars,
+    .close {
+      display: none;
+    } */
+
+    /* .open */
+    /* .fas fa-bars {
+      position: absolute;
+    } */
+
+    /* .aside {
+      position: absolute;
+      left: -250px;
+      height: 100%;
+      transition: all 0.2s;
+      background: #ffffff;
+    }
+
+    input[type="checkbox"]:checked ~ .aside {
+      left: 0;
+    }
+
+    input[type="checkbox"]:checked ~ .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8) !important;
+    } */
+}
+
+@media screen and (max-width: 800px) {
+    .main {
+      width: 100%;
+      padding: 25px;
+      margin: 0 auto;
+    }
+
+    .contentss {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* .open, */
+    .fas fa-bars,
+    .close {
+      display: block;
+    }
+
+    /* .open */
+    .fas fa-bars {
+      position: absolute;
+      margin-bottom: 20px;
+    }
+
+    .aside {
+      position: absolute;
+      left: -250px;
+      height: 100%;
+      transition: all 0.2s;
+      background-color: #dbedf0;
+    }
+
+    input[type="checkbox"]:checked ~ .aside {
+      left: 0;
+      background-color: #dbedf0;
+    }
+
+    input[type="checkbox"]:checked ~ .back {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8) !important;
+    }
+
+    .card-contents {
+        width: 100%;
+        padding: 10px;
+        display: block;
+        margin-bottom: 40px;
+        background-color: #eaf6fd;
+    }
+
+    .list-area {
+      display: flex;
+    }
+
+    .list-area:after {
+        clear: both;
+        display: block;
+        content: " ";
+    }
+
+    .Buroger-list {
+      width: auto;
+      margin-right: 20px;
+      margin-left: 20px
+    }
+
+    .Burogu-list {
+      width: auto;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+
+    .Buroger-image {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        width: 100px;
+        height: 100px;
+        display: block;
+    }
+
+    .Buroger-name {
+        text-align: center;
+    }
+
+    .text-title {
+        font-weight: bold;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 606px) {
+  .col-md-2 {
+    flex: auto;
+    width: 100%;
+    /* box-sizing: border-box; */
+    position: relative;
+    padding-top: 10px;
+    font-size: 15px;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 523px) {
+  .form-input {
+    width: auto;
+  }
+}
+
+/* @media screen and (max-width: 380px) {
+  .button-list {
+    width: 380px;
+  }
+} */
